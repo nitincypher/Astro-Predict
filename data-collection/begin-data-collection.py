@@ -9,10 +9,14 @@ dsoloaders = dsoloader.load_dso_list_files()
 #TODO: Add code block to merge all the errors
 
 #Scrape the images
+cwd = os.getcwd()
+cwd = cwd + os.path.sep + "pics"
+os.mkdir(cwd)
 for dsoloader in dsoloaders:
     for dso in dsoloader.getObjectList():
         print(dso)
-        scraper.run(dso, "C:\nitin\astro-predict\pics", 10)
+        os.mkdir(cwd+os.path.sep+dso)
+        scraper.run(dso, cwd+os.path.sep+dso, 10)
 #scraper.run()
 
 

@@ -9,17 +9,18 @@ def getObjectList():
 
     config = configparser.ConfigParser()
     config.read('../config.ini')
-    #Comment The Proxy Block if you don't require
-    #Proxy Block
-    proxy = urllib2.ProxyHandler({
-        'http': config['PROXY']['HTTP'],
-        'https': config['PROXY']['HTTPS']
-    })
-    opener = urllib2.build_opener(proxy)
-    urllib2.install_opener(opener)
-    #Proxy Block
-    opener = urllib2.build_opener(proxy)
-    urllib2.install_opener(opener)
+    if config['PROXY']['USE_PROXY'] == "true":
+        #Comment The Proxy Block if you don't require
+        #Proxy Block
+        proxy = urllib2.ProxyHandler({
+            'http': config['PROXY']['HTTP'],
+            'https': config['PROXY']['HTTPS']
+        })
+        opener = urllib2.build_opener(proxy)
+        urllib2.install_opener(opener)
+        #Proxy Block
+        opener = urllib2.build_opener(proxy)
+        urllib2.install_opener(opener)
 
     # query the website and return the html to the variable ‘page’
     page = urllib2.urlopen(quote_page)

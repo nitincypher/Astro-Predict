@@ -80,15 +80,18 @@ def run(query, save_directory, num_images=100):
 def main():
     config = configparser.ConfigParser()
     config.read('../config.ini')
-    #Comment The Proxy Block if you don't require
-    #Proxy Block
-    proxy = urllib2.ProxyHandler({
-        'http': config['PROXY']['HTTP'],
-        'https': config['PROXY']['HTTPS']
-    })
-    opener = urllib2.build_opener(proxy)
-    urllib2.install_opener(opener)
-    #Proxy Block
+    if config['PROXY']['USE_PROXY'] == "true":
+        #Comment The Proxy Block if you don't require
+        #Proxy Block
+        proxy = urllib2.ProxyHandler({
+            'http': config['PROXY']['HTTP'],
+            'https': config['PROXY']['HTTPS']
+        })
+        opener = urllib2.build_opener(proxy)
+        urllib2.install_opener(opener)
+        #Proxy Block
+        opener = urllib2.build_opener(proxy)
+        urllib2.install_opener(opener)
     parser = argparse.ArgumentParser(description='Scrape Google images')
     parser.add_argument('-s', '--search', default='bananas', type=str, help='search term')
     parser.add_argument('-n', '--num_images', default=1, type=int, help='num images to save')
