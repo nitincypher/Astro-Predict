@@ -3,7 +3,7 @@ import sys
 import re
 import importlib
 
-def load_plugins():
+def load_dso_list_files():
     pysearchre = re.compile('List.py$', re.IGNORECASE)
     pluginfiles = filter(pysearchre.search,
                            os.listdir(os.path.join(os.path.dirname(__file__),'plugins')))
